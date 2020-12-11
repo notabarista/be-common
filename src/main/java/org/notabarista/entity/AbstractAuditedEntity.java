@@ -15,33 +15,40 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.experimental.SuperBuilder;
 
 @MappedSuperclass
 @Getter
 @Setter
+@SuperBuilder
+@AllArgsConstructor
+@NoArgsConstructor
 @JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 @EntityListeners(AuditingEntityListener.class)
 public abstract class AbstractAuditedEntity extends AbstractEntity {
 
 	@CreatedDate
 	@Column(name = "created_at", updatable = false)
-	private Date createdAt;
+	protected Date createdAt;
 
 	@LastModifiedDate
 	@Column(name = "modified_at")
-	private Date modifiedAt;
+	protected Date modifiedAt;
 
 	@Column(name = "created_by", updatable = false)
 	@CreatedBy
-	private String createdBy;
+	protected String createdBy;
 
 	@Column(name = "modified_by")
 	@LastModifiedBy
-	private String modifiedBy;
+	protected String modifiedBy;
 
 	@Version
 	@Column
-	private Integer version;
+	protected Integer version;
+
 }
