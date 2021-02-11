@@ -10,7 +10,7 @@ import org.notabarista.dto.AbstractDTO;
 import org.notabarista.entity.AbstractEntity;
 import org.notabarista.entity.response.Response;
 import org.notabarista.entity.response.ResponseStatus;
-import org.notabarista.exception.AbstractNotabarristaException;
+import org.notabarista.exception.AbstractNotabaristaException;
 import org.notabarista.service.abstr.IDeleteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -36,7 +36,7 @@ public abstract class AbstractDeleteController<T extends AbstractEntity, U exten
 	@DeleteMapping(value = "/delete/{id}", produces = "application/json")
 	@ResponseBody
 	public ResponseEntity<Response<U>> deleteById(@NonNull @PathVariable Integer id, HttpServletRequest request,
-			HttpServletResponse response) throws AbstractNotabarristaException {
+			HttpServletResponse response) throws AbstractNotabaristaException {
 		StopWatch watch = new StopWatch();
 		watch.start();
 		if (log.isInfoEnabled()) {
@@ -57,7 +57,7 @@ public abstract class AbstractDeleteController<T extends AbstractEntity, U exten
 	@DeleteMapping(value = "/deleteByIds", produces = "application/json")
 	@ResponseBody
 	public ResponseEntity<Response<U>> deleteByIds(@NonNull @RequestBody List<Integer> ids, HttpServletRequest request,
-			HttpServletResponse response) throws AbstractNotabarristaException {
+			HttpServletResponse response) throws AbstractNotabaristaException {
 		StopWatch watch = new StopWatch();
 		watch.start();
 		if (log.isInfoEnabled()) {
@@ -78,7 +78,7 @@ public abstract class AbstractDeleteController<T extends AbstractEntity, U exten
 	@DeleteMapping(value = "/delete", produces = "application/json")
 	@ResponseBody
 	public ResponseEntity<Response<U>> delete(@NonNull @RequestBody U dto, HttpServletRequest request,
-			HttpServletResponse response) throws AbstractNotabarristaException {
+			HttpServletResponse response) throws AbstractNotabaristaException {
 		StopWatch watch = new StopWatch();
 		watch.start();
 		if (log.isInfoEnabled()) {

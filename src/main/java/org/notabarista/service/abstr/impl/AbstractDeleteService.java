@@ -6,7 +6,7 @@ import javax.transaction.Transactional;
 
 import org.notabarista.dto.AbstractDTO;
 import org.notabarista.entity.AbstractEntity;
-import org.notabarista.exception.AbstractNotabarristaException;
+import org.notabarista.exception.AbstractNotabaristaException;
 import org.notabarista.exception.EntityNotFoundException;
 import org.notabarista.service.abstr.IDeleteService;
 
@@ -16,15 +16,15 @@ import lombok.extern.log4j.Log4j2;
 public abstract class AbstractDeleteService<T extends AbstractEntity, U extends AbstractDTO>
 		extends AbstractWriteService<T, U> implements IDeleteService<T, U> {
 
-	public void preDeleteById(final Integer id) throws AbstractNotabarristaException {
+	public void preDeleteById(final Integer id) throws AbstractNotabaristaException {
 	}
 
-	public void postDeleteById(final Integer id) throws AbstractNotabarristaException {
+	public void postDeleteById(final Integer id) throws AbstractNotabaristaException {
 	}
 
 	@Override
 	@Transactional
-	public void deleteById(final Integer id) throws AbstractNotabarristaException {
+	public void deleteById(final Integer id) throws AbstractNotabaristaException {
 		if (log.isInfoEnabled()) {
 			log.info("Delete by id:" + id);
 		}
@@ -42,15 +42,15 @@ public abstract class AbstractDeleteService<T extends AbstractEntity, U extends 
 		postDeleteById(id);
 	}
 
-	public void preDeleteByIds(final List<Integer> ids) throws AbstractNotabarristaException {
+	public void preDeleteByIds(final List<Integer> ids) throws AbstractNotabaristaException {
 	}
 
-	public void postDeleteByIds(final List<Integer> ids) throws AbstractNotabarristaException {
+	public void postDeleteByIds(final List<Integer> ids) throws AbstractNotabaristaException {
 	}
 
 	@Override
 	@Transactional
-	public void deleteByIds(final List<Integer> ids) throws AbstractNotabarristaException {
+	public void deleteByIds(final List<Integer> ids) throws AbstractNotabaristaException {
 		if (log.isInfoEnabled()) {
 			log.info("Delete by ids:" + ids);
 		}
@@ -66,7 +66,7 @@ public abstract class AbstractDeleteService<T extends AbstractEntity, U extends 
 
 	@Override
 	@Transactional
-	public void delete(U dto) throws AbstractNotabarristaException {
+	public void delete(U dto) throws AbstractNotabaristaException {
 		deleteById(dto.getId());
 	}
 

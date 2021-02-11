@@ -12,7 +12,7 @@ import org.notabarista.dto.AbstractDTO;
 import org.notabarista.entity.AbstractEntity;
 import org.notabarista.entity.response.Response;
 import org.notabarista.entity.response.ResponseStatus;
-import org.notabarista.exception.AbstractNotabarristaException;
+import org.notabarista.exception.AbstractNotabaristaException;
 import org.notabarista.service.abstr.IWriteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -104,7 +104,7 @@ public abstract class AbstractWriteController<T extends AbstractEntity, U extend
 	@PatchMapping(value = "/updateList", produces = "application/json")
 	@ResponseBody
 	public ResponseEntity<Response<U>> update(@NonNull @RequestBody List<U> dtos, HttpServletRequest request,
-			HttpServletResponse response) throws AbstractNotabarristaException {
+			HttpServletResponse response) throws AbstractNotabaristaException {
 		StopWatch watch = new StopWatch();
 		watch.start();
 		if (log.isInfoEnabled()) {

@@ -11,7 +11,7 @@ import org.notabarista.dto.AbstractDTO;
 import org.notabarista.entity.AbstractEntity;
 import org.notabarista.entity.response.Response;
 import org.notabarista.entity.response.ResponseStatus;
-import org.notabarista.exception.AbstractNotabarristaException;
+import org.notabarista.exception.AbstractNotabaristaException;
 import org.notabarista.service.abstr.IReadService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -40,7 +40,7 @@ public abstract class AbstractReadController<T extends AbstractEntity, U extends
 	@GetMapping(value = "/findAll", produces = "application/json")
 	@ResponseBody
 	public ResponseEntity<Response<U>> findAll(Pageable pageable, HttpServletRequest request,
-			HttpServletResponse response) throws AbstractNotabarristaException {
+			HttpServletResponse response) throws AbstractNotabaristaException {
 		StopWatch watch = new StopWatch();
 		watch.start();
 		if (log.isInfoEnabled()) {
@@ -77,7 +77,7 @@ public abstract class AbstractReadController<T extends AbstractEntity, U extends
 	@GetMapping(value = "/findById/{id}", produces = "application/json")
 	@ResponseBody
 	public ResponseEntity<Response<U>> findById(@NonNull @PathVariable Integer id, HttpServletRequest request,
-			HttpServletResponse response) throws AbstractNotabarristaException {
+			HttpServletResponse response) throws AbstractNotabaristaException {
 		StopWatch watch = new StopWatch();
 		watch.start();
 		if (log.isInfoEnabled()) {
@@ -98,7 +98,7 @@ public abstract class AbstractReadController<T extends AbstractEntity, U extends
 	@PostMapping(value = "/findAllByEntity", produces = "application/json")
 	@ResponseBody
 	public ResponseEntity<Response<U>> findAllByEntity(@NonNull @RequestBody U entity, Pageable pageable,
-			HttpServletRequest request, HttpServletResponse response) throws AbstractNotabarristaException {
+			HttpServletRequest request, HttpServletResponse response) throws AbstractNotabaristaException {
 		StopWatch watch = new StopWatch();
 		watch.start();
 		if (log.isInfoEnabled()) {

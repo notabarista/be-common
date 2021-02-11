@@ -9,7 +9,7 @@ import javax.persistence.EntityNotFoundException;
 
 import org.notabarista.dto.AbstractDTO;
 import org.notabarista.entity.AbstractEntity;
-import org.notabarista.exception.AbstractNotabarristaException;
+import org.notabarista.exception.AbstractNotabaristaException;
 import org.notabarista.service.abstr.IReadService;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
@@ -28,7 +28,7 @@ public abstract class AbstractReadService<T extends AbstractEntity, U extends Ab
 	private static final String ID = "id";
 	
 	@Override
-	public Page<U> findAll(Pageable pageable) throws AbstractNotabarristaException {
+	public Page<U> findAll(Pageable pageable) throws AbstractNotabaristaException {
 		if (log.isInfoEnabled()) {
 			log.info("Finding all");
 		}
@@ -46,7 +46,7 @@ public abstract class AbstractReadService<T extends AbstractEntity, U extends Ab
 	}
 	
 	@Override
-	public List<U> findAllSorted(Sort sort) throws AbstractNotabarristaException {
+	public List<U> findAllSorted(Sort sort) throws AbstractNotabaristaException {
 		if (log.isInfoEnabled()) {
 			log.info("Finding all sorted");
 		}
@@ -65,7 +65,7 @@ public abstract class AbstractReadService<T extends AbstractEntity, U extends Ab
 	}
 	
 	@Override
-	public List<U> findAll() throws AbstractNotabarristaException {
+	public List<U> findAll() throws AbstractNotabaristaException {
 		if (log.isInfoEnabled()) {
 			log.info("Finding all");
 		}
@@ -78,7 +78,7 @@ public abstract class AbstractReadService<T extends AbstractEntity, U extends Ab
 	}
 
 	@Override
-	public U findById(Integer id) throws AbstractNotabarristaException {
+	public U findById(Integer id) throws AbstractNotabaristaException {
 		if (log.isInfoEnabled()) {
 			log.info("Find by id:" + id);
 		}
@@ -98,7 +98,7 @@ public abstract class AbstractReadService<T extends AbstractEntity, U extends Ab
 	}
 
 	@Override
-	public Page<U> findByDTO(U dto, Pageable pageable) throws AbstractNotabarristaException {
+	public Page<U> findByDTO(U dto, Pageable pageable) throws AbstractNotabaristaException {
 		if (log.isInfoEnabled()) {
 			log.info("Finding by dto: " + dto.getClass().getSimpleName());
 		}
@@ -123,7 +123,7 @@ public abstract class AbstractReadService<T extends AbstractEntity, U extends Ab
 	}
 
 	@Override
-	public List<U> findByDTO(U dto) throws AbstractNotabarristaException {
+	public List<U> findByDTO(U dto) throws AbstractNotabaristaException {
 		if (log.isInfoEnabled()) {
 			log.info("Finding by dto: " + dto.getClass().getSimpleName());
 		}

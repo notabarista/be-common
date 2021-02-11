@@ -19,7 +19,7 @@ public interface GenericConverter<T extends AbstractEntity, U extends AbstractDT
 		return entities.stream().map(this::createFrom).collect(Collectors.toList());
 	}
 
-	default List<T> createFromDto(final Collection<U> dtos) {
+	default List<T> createFromDtos(final Collection<U> dtos) {
 		return dtos.stream().map(this::createFrom).collect(Collectors.toList());
 	}
 

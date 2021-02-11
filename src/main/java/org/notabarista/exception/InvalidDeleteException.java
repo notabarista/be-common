@@ -1,6 +1,6 @@
 package org.notabarista.exception;
 
-public class InvalidDeleteException extends AbstractNotabarristaException {
+public class InvalidDeleteException extends AbstractNotabaristaException {
 
 	private static final long serialVersionUID = -4227944535083226521L;
 
