@@ -114,7 +114,7 @@ public class BackendRequestService implements IBackendRequestService {
 			if (log.isDebugEnabled()) {
 				log.debug("Response status: " + response.getStatusCodeValue());
 			}
-			if (null != response && response.getStatusCodeValue() == 200 && response.getBody() != null) {
+			if (null != response && response.getStatusCodeValue() >= 200 && response.getStatusCodeValue() <= 299 && response.getBody() != null) {
 				return response.getBody();
 			}
 		} catch (Exception e) {
