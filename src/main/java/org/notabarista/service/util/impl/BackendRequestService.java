@@ -55,7 +55,7 @@ public class BackendRequestService implements IBackendRequestService {
 
 		URI serviceUri = this.getServiceUri(microService.getMicroserviceName());
 		String resourcePath = serviceUri.toString() + uri;
-		return executeRequest(resourcePath, object, HttpMethod.GET, parameterizedTypeReference);
+		return executeRequest(resourcePath, object, HttpMethod.POST, parameterizedTypeReference);
 	}
 
 	@Override
@@ -65,6 +65,24 @@ public class BackendRequestService implements IBackendRequestService {
 		URI serviceUri = this.getServiceUri(microService.getMicroserviceName());
 		String resourcePath = serviceUri.toString() + uri;
 		return executeRequest(resourcePath, object, HttpMethod.GET, parameterizedTypeReference);
+	}
+	
+	@Override
+	public <T> Response<T> executePut(MicroService microService, String uri, Object object,
+			ParameterizedTypeReference<Response<T>> parameterizedTypeReference) throws AbstractNotabaristaException {
+
+		URI serviceUri = this.getServiceUri(microService.getMicroserviceName());
+		String resourcePath = serviceUri.toString() + uri;
+		return executeRequest(resourcePath, object, HttpMethod.PUT, parameterizedTypeReference);
+	}
+	
+	@Override
+	public <T> Response<T> executePatch(MicroService microService, String uri, Object object,
+			ParameterizedTypeReference<Response<T>> parameterizedTypeReference) throws AbstractNotabaristaException {
+
+		URI serviceUri = this.getServiceUri(microService.getMicroserviceName());
+		String resourcePath = serviceUri.toString() + uri;
+		return executeRequest(resourcePath, object, HttpMethod.PATCH, parameterizedTypeReference);
 	}
 
 	@Override
@@ -96,7 +114,7 @@ public class BackendRequestService implements IBackendRequestService {
 			if (log.isDebugEnabled()) {
 				log.debug("Response status: " + response.getStatusCodeValue());
 			}
-			if (null != response && response.getStatusCodeValue() == 200 && response.getBody() != null) {
+			if (null != response && response.getStatusCodeValue() >= 200 && response.getStatusCodeValue() <= 299 && response.getBody() != null) {
 				return response.getBody();
 			}
 		} catch (Exception e) {

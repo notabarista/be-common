@@ -21,4 +21,10 @@ public interface IBackendRequestService {
 	<T extends Object> Response<T> executeRequest(String uri, HttpMethod httpMethod, Object object,
 			ParameterizedTypeReference<Response<T>> parameterizedTypeReference);
 
+	<T extends Object> Response<T> executePut(MicroService microService, String uri, Object object,
+			ParameterizedTypeReference<Response<T>> parameterizedTypeReference) throws AbstractNotabaristaException;
+	
+	<T extends Object> Response<T> executePatch(MicroService microService, String uri, Object object,
+			ParameterizedTypeReference<Response<T>> parameterizedTypeReference) throws AbstractNotabaristaException;
+
 }
