@@ -1,6 +1,7 @@
 package org.notabarista.service.abstr;
 
 import java.util.List;
+import java.util.UUID;
 
 import org.notabarista.dto.AbstractDTO;
 import org.notabarista.entity.AbstractEntity;
@@ -13,7 +14,7 @@ public interface IReadService<T extends AbstractEntity, U extends AbstractDTO> e
 
 	Page<U> findAll(Pageable pageable) throws AbstractNotabaristaException;
 
-	U findById(Integer id) throws AbstractNotabaristaException;
+	U findById(UUID id) throws AbstractNotabaristaException;
 
 	List<U> findAll() throws AbstractNotabaristaException;
 

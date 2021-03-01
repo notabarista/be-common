@@ -3,6 +3,7 @@ package org.notabarista.service.abstr.impl;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 import javax.persistence.EntityNotFoundException;
@@ -78,7 +79,7 @@ public abstract class AbstractReadService<T extends AbstractEntity, U extends Ab
 	}
 
 	@Override
-	public U findById(Integer id) throws AbstractNotabaristaException {
+	public U findById(UUID id) throws AbstractNotabaristaException {
 		if (log.isInfoEnabled()) {
 			log.info("Find by id:" + id);
 		}

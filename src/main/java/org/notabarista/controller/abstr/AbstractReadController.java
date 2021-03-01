@@ -2,6 +2,7 @@ package org.notabarista.controller.abstr;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -76,7 +77,7 @@ public abstract class AbstractReadController<T extends AbstractEntity, U extends
 	@CrossOrigin
 	@GetMapping(value = "/findById/{id}", produces = "application/json")
 	@ResponseBody
-	public ResponseEntity<Response<U>> findById(@NonNull @PathVariable Integer id, HttpServletRequest request,
+	public ResponseEntity<Response<U>> findById(@NonNull @PathVariable UUID id, HttpServletRequest request,
 			HttpServletResponse response) throws AbstractNotabaristaException {
 		StopWatch watch = new StopWatch();
 		watch.start();

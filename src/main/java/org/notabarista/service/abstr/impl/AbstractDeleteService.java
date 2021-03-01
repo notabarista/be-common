@@ -1,6 +1,7 @@
 package org.notabarista.service.abstr.impl;
 
 import java.util.List;
+import java.util.UUID;
 
 import javax.transaction.Transactional;
 
@@ -16,15 +17,15 @@ import lombok.extern.log4j.Log4j2;
 public abstract class AbstractDeleteService<T extends AbstractEntity, U extends AbstractDTO>
 		extends AbstractWriteService<T, U> implements IDeleteService<T, U> {
 
-	public void preDeleteById(final Integer id) throws AbstractNotabaristaException {
+	public void preDeleteById(final UUID id) throws AbstractNotabaristaException {
 	}
 
-	public void postDeleteById(final Integer id) throws AbstractNotabaristaException {
+	public void postDeleteById(final UUID id) throws AbstractNotabaristaException {
 	}
 
 	@Override
 	@Transactional
-	public void deleteById(final Integer id) throws AbstractNotabaristaException {
+	public void deleteById(final UUID id) throws AbstractNotabaristaException {
 		if (log.isInfoEnabled()) {
 			log.info("Delete by id:" + id);
 		}
@@ -42,22 +43,22 @@ public abstract class AbstractDeleteService<T extends AbstractEntity, U extends 
 		postDeleteById(id);
 	}
 
-	public void preDeleteByIds(final List<Integer> ids) throws AbstractNotabaristaException {
+	public void preDeleteByIds(final List<UUID> ids) throws AbstractNotabaristaException {
 	}
 
-	public void postDeleteByIds(final List<Integer> ids) throws AbstractNotabaristaException {
+	public void postDeleteByIds(final List<UUID> ids) throws AbstractNotabaristaException {
 	}
 
 	@Override
 	@Transactional
-	public void deleteByIds(final List<Integer> ids) throws AbstractNotabaristaException {
+	public void deleteByIds(final List<UUID> ids) throws AbstractNotabaristaException {
 		if (log.isInfoEnabled()) {
 			log.info("Delete by ids:" + ids);
 		}
 
 		preDeleteByIds(ids);
 
-		for (Integer id : ids) {
+		for (UUID id : ids) {
 			deleteById(id);
 		}
 

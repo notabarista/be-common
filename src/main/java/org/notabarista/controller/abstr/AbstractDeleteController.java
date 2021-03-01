@@ -1,6 +1,7 @@
 package org.notabarista.controller.abstr;
 
 import java.util.List;
+import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -35,15 +36,12 @@ public abstract class AbstractDeleteController<T extends AbstractEntity, U exten
 	@CrossOrigin
 	@DeleteMapping(value = "/delete/{id}", produces = "application/json")
 	@ResponseBody
-	public ResponseEntity<Response<U>> deleteById(@NonNull @PathVariable Integer id, HttpServletRequest request,
+	public ResponseEntity<Response<U>> deleteById(@NonNull @PathVariable UUID id, HttpServletRequest request,
 			HttpServletResponse response) throws AbstractNotabaristaException {
 		StopWatch watch = new StopWatch();
 		watch.start();
 		if (log.isInfoEnabled()) {
-			log.info("Delete entity");
-		}
-		if (log.isDebugEnabled()) {
-			log.debug("Delete entity:" + id);
+			log.info("Delete entity" + id);
 		}
 		
 		service.deleteById(id);
@@ -56,7 +54,7 @@ public abstract class AbstractDeleteController<T extends AbstractEntity, U exten
 	@CrossOrigin
 	@DeleteMapping(value = "/deleteByIds", produces = "application/json")
 	@ResponseBody
-	public ResponseEntity<Response<U>> deleteByIds(@NonNull @RequestBody List<Integer> ids, HttpServletRequest request,
+	public ResponseEntity<Response<U>> deleteByIds(@NonNull @RequestBody List<UUID> ids, HttpServletRequest request,
 			HttpServletResponse response) throws AbstractNotabaristaException {
 		StopWatch watch = new StopWatch();
 		watch.start();

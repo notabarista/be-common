@@ -1,10 +1,13 @@
 package org.notabarista.entity;
 
+import java.util.UUID;
+
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
+
+import org.hibernate.annotations.GenericGenerator;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -24,8 +27,9 @@ import lombok.experimental.SuperBuilder;
 public abstract class AbstractEntity {
 
 	@Id
-	@Column(name = "id", unique = true)
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	protected Integer id;
+    @GeneratedValue(generator = "uuid")
+    @GenericGenerator(name = "uuid", strategy = "uuid2")
+	@Column(name = "id", updatable = false, nullable = false)
+    private UUID id;
 
 }
