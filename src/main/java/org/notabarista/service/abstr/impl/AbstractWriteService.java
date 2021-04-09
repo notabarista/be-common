@@ -31,9 +31,9 @@ public abstract class AbstractWriteService<T extends AbstractEntity, U extends A
 		
 		preInsert(dto);
 		
-		T entity = getConverter().createFrom(dto);
+		T entity = getConverter().createFromSource(dto);
 		T savedEntity = this.repository.save(entity);
-		U savedDto = getConverter().createFrom(savedEntity);
+		U savedDto = getConverter().createFromTarget(savedEntity);
 		
 		postInsert(savedDto);
 		
@@ -78,9 +78,9 @@ public abstract class AbstractWriteService<T extends AbstractEntity, U extends A
 		}
 		preUpdate(dto);
 		
-		T entity = getConverter().createFrom(dto);
+		T entity = getConverter().createFromSource(dto);
 		T savedEntity = this.repository.save(entity);
-		U savedDto = getConverter().createFrom(savedEntity);
+		U savedDto = getConverter().createFromTarget(savedEntity);
 		
 		postUpdate(savedDto);
 		return savedDto;

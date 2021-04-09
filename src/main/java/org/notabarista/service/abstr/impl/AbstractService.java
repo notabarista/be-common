@@ -3,7 +3,7 @@ package org.notabarista.service.abstr.impl;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
-import org.notabarista.converter.GenericConverter;
+import org.notabarista.converter.GenericJPAConverter;
 import org.notabarista.dto.AbstractDTO;
 import org.notabarista.entity.AbstractEntity;
 import org.notabarista.repository.IAbstractRepository;
@@ -16,7 +16,7 @@ public abstract class AbstractService<T extends AbstractEntity, U extends Abstra
 	private ApplicationContext context;
 	
 	@Autowired
-	private GenericConverter<T, U> converter;
+	private GenericJPAConverter<T, U> converter;
 	
 	@Autowired
 	protected IAbstractRepository<T> repository;
@@ -28,7 +28,7 @@ public abstract class AbstractService<T extends AbstractEntity, U extends Abstra
 		return context;
 	}
 
-	protected GenericConverter<T, U> getConverter() {
+	protected GenericJPAConverter<T, U> getConverter() {
 		return converter;
 	}
 }

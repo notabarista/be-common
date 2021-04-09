@@ -42,7 +42,7 @@ public abstract class AbstractReadService<T extends AbstractEntity, U extends Ab
 		}
 		Page<T> entities = repository.findAll(pageable);
 		
-		Page<U> dtoPage = entities.map(getConverter()::createFrom);
+		Page<U> dtoPage = entities.map(getConverter()::createFromTarget);
 		return dtoPage;
 	}
 	
@@ -60,7 +60,7 @@ public abstract class AbstractReadService<T extends AbstractEntity, U extends Ab
 		}
 		List<T> entities = repository.findAll(sort);
 		
-		List<U> dtos = entities.stream().map(getConverter()::createFrom).collect(Collectors.toList());
+		List<U> dtos = entities.stream().map(getConverter()::createFromTarget).collect(Collectors.toList());
 		
 		return dtos;
 	}
@@ -73,7 +73,7 @@ public abstract class AbstractReadService<T extends AbstractEntity, U extends Ab
 		
 		List<T> entities = repository.findAll(Sort.by(Sort.Direction.ASC, ID));
 		
-		List<U> dtos = entities.stream().map(getConverter()::createFrom).collect(Collectors.toList());
+		List<U> dtos = entities.stream().map(getConverter()::createFromTarget).collect(Collectors.toList());
 		
 		return dtos;
 	}
@@ -90,7 +90,7 @@ public abstract class AbstractReadService<T extends AbstractEntity, U extends Ab
 			List<T> retList = new ArrayList<>();
 			retList.add(entity);
 			
-			U dto = getConverter().createFrom(entity);
+			U dto = getConverter().createFromTarget(entity);
 			
 			return dto;
 		} else {
@@ -113,12 +113,12 @@ public abstract class AbstractReadService<T extends AbstractEntity, U extends Ab
 		ExampleMatcher exampleMatcher = ExampleMatcher.matchingAll().withIgnoreCase().withIgnoreNullValues()
 				.withIgnorePaths(ID);
 		
-		T entity = getConverter().createFrom(dto);
+		T entity = getConverter().createFromSource(dto);
 		
 		Example<T> example = Example.of(entity, exampleMatcher);
 		Page<T> entities = repository.findAll(example, pageable);
 		
-		Page<U> dtoPage = entities.map(getConverter()::createFrom);
+		Page<U> dtoPage = entities.map(getConverter()::createFromTarget);
 		
 		return dtoPage;
 	}
@@ -134,12 +134,12 @@ public abstract class AbstractReadService<T extends AbstractEntity, U extends Ab
 		ExampleMatcher exampleMatcher = ExampleMatcher.matchingAll().withIgnoreCase().withIgnoreNullValues()
 				.withIgnorePaths(ID);
 		
-		T entity = getConverter().createFrom(dto);
+		T entity = getConverter().createFromSource(dto);
 		
 		Example<T> example = Example.of(entity, exampleMatcher);
 		List<T> entities = repository.findAll(example);
 		
-		List<U> dtos = entities.stream().map(getConverter()::createFrom).collect(Collectors.toList());
+		List<U> dtos = entities.stream().map(getConverter()::createFromTarget).collect(Collectors.toList());
 		
 		return dtos;
 	}
