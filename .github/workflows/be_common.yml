@@ -20,9 +20,10 @@ jobs:
     steps:
     - name: Checkout branch from Github
       uses: actions/checkout@v2
-    - env:
-        ci_token: ${{ secrets.CI_TOKEN }}
-    - run: |
+    - shell: bash
+      env:
+        ci_token: ${{ secrets.GITHUB_TOKEN }}
+      run: |
        curl \
        -X POST \
        -H "Accept: application/vnd.github.v3+json" \
