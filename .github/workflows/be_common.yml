@@ -15,15 +15,21 @@ on:
   workflow_dispatch:
 
 jobs:
-  defaults:
+  trigger_common_util:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout branch from Github
+      uses: actions/checkout@v2
+
     -run : |
       curl
       -X POST
       -H "Accept: application/vnd.github.v3+json"
       https://api.github.com/repos/notabarista/be-common-util/dispatches
-      -d '{"ref":"pipeline_common_config"}
+      -d '{"ref":"pipeline_common_config"}'
 
   be_common_java__11_x64:
+    needs:   trigger_common_util
     runs-on: ubuntu-latest
     
     steps:
