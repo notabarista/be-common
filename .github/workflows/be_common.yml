@@ -16,12 +16,13 @@ on:
 
 jobs:
   defaults:
-    -run : |
-      curl
-      -X POST
-      -H "Accept: application/vnd.github.v3+json"
-      https://api.github.com/repos/notabarista/be-common-util/dispatches
-      -d '{"ref":"pipeline_common_config"}
+    steps:
+      -run : |
+        curl
+        -X POST
+        -H "Accept: application/vnd.github.v3+json"
+        https://api.github.com/repos/notabarista/be-common-util/dispatches
+        -d '{"ref":"pipeline_common_config"}
 
   be_common_java__11_x64:
     runs-on: ubuntu-latest
