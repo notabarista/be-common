@@ -50,11 +50,8 @@ jobs:
           repo: notabarista/be-common-util
           path: ./github/dependencies
 
-      - name: Display structure of downloaded files
-        run: ls -R
-
       - name: Build with maven
-        run: mvn dependency:tree clean install:install-file -Dfile=./github/dependencies
+        run: mvn -Dmaven.repo.local=./github/dependencies/ dependency:tree clean install
       - run: mkdir staging && cp target/*.jar staging
       - uses: actions/upload-artifact@v2
         with:
