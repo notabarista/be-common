@@ -29,11 +29,11 @@ jobs:
         wait_interval: 300
 
   be_common_java__11_x64:
-    needs: trigger_common_util
+    #needs: trigger_common_util
     runs-on: ubuntu-latest
     
     steps:
-      - name: Checkout branch from Github 
+      - name: Checkout branch from Github
         uses: actions/checkout@v2
         
       - name: Setup JDK 11.0.10
@@ -50,11 +50,11 @@ jobs:
           repo: notabarista/be-common-util
           path: ./github/dependencies
 
-      - name: Display structure of downloaded files
-        run: ls -R
+      - name: LocalRepository
+        run: mvn help:evaluate -Dexpression=settings.localRepository
 
       - name: Build with maven
-        run: mvn dependency:tree clean install:install-file -Dfile=./github/dependencies
+        run: mvn -Dmaven.repo.local=./github/dependencies/ dependency:tree clean install
       - run: mkdir staging && cp target/*.jar staging
       - uses: actions/upload-artifact@v2
         with:
