@@ -12,6 +12,14 @@
 		<relativePath />
 	</parent>
 
+  <repositories>
+    <repository>
+      <id>github</id>
+      <name>Notabarista common-util</name>
+      <url>https://maven.pkg.github.com/notabarista/be-common-util</url>
+    </repository>
+  </repositories>
+
 	<groupId>org.notabarista</groupId>
 	<artifactId>common-lib</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
