@@ -1,5 +1,6 @@
 package org.notabarista.entity;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -33,11 +34,11 @@ public abstract class AbstractAuditedEntity extends AbstractEntity {
 
 	@CreatedDate
 	@Column(name = "created_at", updatable = false)
-	protected Date createdAt;
+	protected LocalDate createdAt;
 
 	@LastModifiedDate
 	@Column(name = "modified_at")
-	protected Date modifiedAt;
+	protected LocalDate modifiedAt;
 
 	@Column(name = "created_by", updatable = false)
 	@CreatedBy
