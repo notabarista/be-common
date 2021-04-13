@@ -15,25 +15,25 @@ on:
   workflow_dispatch:
 
 jobs:
-  trigger_common_util:
-    runs-on: ubuntu-latest
-    steps:
-    - name: Checkout branch from Github
-      uses: convictional/trigger-workflow-and-wait@v1.3.0
-      with:
-        owner: notabarista
-        repo: be-common-util
-        github_token: ${{ secrets.CI_TOKEN}}
-        ref: pipeline_common_config
-        workflow_file_name: be_common_util.yml
-        wait_interval: 300
+  # trigger_common_util:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #   - name: Checkout branch from Github
+  #     uses: convictional/trigger-workflow-and-wait@v1.3.0
+  #     with:
+  #       owner: notabarista
+  #       repo: be-common-util
+  #       github_token: ${{ secrets.CI_TOKEN}}
+  #       ref: pipeline_common_config
+  #       workflow_file_name: be_common_util.yml
+  #       wait_interval: 300
 
   be_common_java__11_x64:
-    needs: trigger_common_util
+    #needs: trigger_common_util
     runs-on: ubuntu-latest
     
     steps:
-      - name: Checkout branch from Github 
+      - name: Checkout branch from Github
         uses: actions/checkout@v2
         
       - name: Setup JDK 11.0.10
@@ -41,22 +41,10 @@ jobs:
         with:
          java-version: '11.0.10'
          architecture: x64
-      - name: Get dependencies...
-        uses: dawidd6/action-download-artifact@v2
-        with: 
-          name: common-util
-          workflow: be_common_util.yml
-          branch: pipeline_common_config
-          repo: notabarista/be-common-util
-          path: ./github/dependencies
-
-      - name: Display structure of downloaded files
-        run: ls -R
 
       - name: Build with maven
-        run: mvn dependency:tree clean install:install-file -Dfile=./github/dependencies
-      - run: mkdir staging && cp target/*.jar staging
-      - uses: actions/upload-artifact@v2
-        with:
-          name: Package
-          path: staging
+        run: mvn dependency:tree clean install
+      - name: Deploy artifacts
+        run: mvn -batch-mode deploy
+        env:
+          GITHUB_TOKEN: ${{ secrets.CI_TOKEN }}
