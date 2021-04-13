@@ -33,7 +33,7 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
-      - name: Checkout branch from Github 
+      - name: Checkout branch from Github
         uses: actions/checkout@v2
         
       - name: Setup JDK 11.0.10
@@ -48,13 +48,14 @@ jobs:
           workflow: be_common_util.yml
           branch: pipeline_common_config
           repo: notabarista/be-common-util
-          path: ./github/dependencies
+          path: /home/runner/.m2/repository
 
-      - name: Display structure of downloaded files
-        run: ls -R
+      - name: Local repository
+        run: mvn help:evaluate -Dexpression=settings.localRepository
+        run: ls /home/runner/.m2/repository -R
 
       - name: Build with maven
-        run: mvn dependency:tree clean install:install-file -Dfile=./github/dependencies
+        run: mvn dependency:tree clean install
       - run: mkdir staging && cp target/*.jar staging
       - uses: actions/upload-artifact@v2
         with:
