@@ -51,10 +51,10 @@ jobs:
           path: ./github/dependencies
 
       - name: Display structure of downloaded files
-        run: ls -R
+        run: ls ~/.m2/repository -R
 
       - name: Build with maven
-        run: mvn dependency:tree clean install:install-file -Dfile=./github/dependencies
+        run: mvn dependency:tree clean install:install-file -Dfile=./github/dependencies/common-util-0.0.1-SNAPSHOT.jar
       - run: mkdir staging && cp target/*.jar staging
       - uses: actions/upload-artifact@v2
         with:
