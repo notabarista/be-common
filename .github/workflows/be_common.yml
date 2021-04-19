@@ -24,7 +24,7 @@ jobs:
         owner: notabarista
         repo: be-common-util
         github_token: ${{ secrets.CI_TOKEN}}
-        ref: pipeline_common_config
+        ref: master
         workflow_file_name: be_common_util.yml
         wait_interval: 300
 
