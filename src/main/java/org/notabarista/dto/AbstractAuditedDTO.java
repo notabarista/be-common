@@ -1,6 +1,7 @@
 package org.notabarista.dto;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 import javax.persistence.MappedSuperclass;
@@ -22,8 +23,8 @@ import lombok.experimental.SuperBuilder;
 @JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 public class AbstractAuditedDTO extends AbstractDTO {
 
-	protected LocalDate createdAt;
-	protected LocalDate modifiedAt;
+	protected LocalDateTime createdAt;
+	protected LocalDateTime modifiedAt;
 	protected String createdBy;
 	protected String modifiedBy;
 	protected Integer version;
