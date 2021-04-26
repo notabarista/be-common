@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.lang3.time.StopWatch;
 import org.notabarista.dto.AbstractDTO;
 import org.notabarista.entity.AbstractEntity;
+import org.notabarista.entity.CanAccessDetails;
 import org.notabarista.entity.response.Response;
 import org.notabarista.entity.response.ResponseStatus;
 import org.notabarista.exception.AbstractNotabaristaException;
@@ -44,6 +45,13 @@ public abstract class AbstractDeleteController<T extends AbstractEntity, U exten
 			log.info("Delete entity" + id);
 		}
 		
+		checkAccessService.checkAccess(CanAccessDetails.builder()
+				.uid(request.getHeader("uid"))
+				.action("delete")
+				.resource(this.getClass().getSimpleName())
+				.microserviceName(microserviceName)
+				.build());
+		
 		service.deleteById(id);
 		
 		watch.stop();
@@ -65,6 +73,13 @@ public abstract class AbstractDeleteController<T extends AbstractEntity, U exten
 			log.debug("Delete by ids:" + ids);
 		}
 
+		checkAccessService.checkAccess(CanAccessDetails.builder()
+				.uid(request.getHeader("uid"))
+				.action("delete")
+				.resource(this.getClass().getSimpleName())
+				.microserviceName(microserviceName)
+				.build());
+		
 		service.deleteByIds(ids);
 		
 		watch.stop();
@@ -86,6 +101,13 @@ public abstract class AbstractDeleteController<T extends AbstractEntity, U exten
 			log.debug("Delete dto:" + dto);
 		}
 
+		checkAccessService.checkAccess(CanAccessDetails.builder()
+				.uid(request.getHeader("uid"))
+				.action("delete")
+				.resource(this.getClass().getSimpleName())
+				.microserviceName(microserviceName)
+				.build());
+		
 		service.delete(dto);
 		
 		watch.stop();

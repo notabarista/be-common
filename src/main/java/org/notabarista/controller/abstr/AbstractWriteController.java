@@ -10,6 +10,7 @@ import javax.validation.Valid;
 import org.apache.commons.lang3.time.StopWatch;
 import org.notabarista.dto.AbstractDTO;
 import org.notabarista.entity.AbstractEntity;
+import org.notabarista.entity.CanAccessDetails;
 import org.notabarista.entity.response.Response;
 import org.notabarista.entity.response.ResponseStatus;
 import org.notabarista.exception.AbstractNotabaristaException;
@@ -47,6 +48,13 @@ public abstract class AbstractWriteController<T extends AbstractEntity, U extend
 		if (log.isDebugEnabled()) {
 			log.debug("Insert dto:" + dto);
 		}
+		
+		checkAccessService.checkAccess(CanAccessDetails.builder()
+				.uid(request.getHeader("uid"))
+				.action("write")
+				.resource(this.getClass().getSimpleName())
+				.microserviceName(microserviceName)
+				.build());
 
 		U d = service.insert(dto);
 		List<U> allDtos = Arrays.asList(d);
@@ -69,6 +77,13 @@ public abstract class AbstractWriteController<T extends AbstractEntity, U extend
 		if (log.isDebugEnabled()) {
 			log.info("Insert dtos:" + dtos);
 		}
+		
+		checkAccessService.checkAccess(CanAccessDetails.builder()
+				.uid(request.getHeader("uid"))
+				.action("write")
+				.resource(this.getClass().getSimpleName())
+				.microserviceName(microserviceName)
+				.build());
 
 		List<U> savedDtos = service.insert(dtos);
 
@@ -90,6 +105,13 @@ public abstract class AbstractWriteController<T extends AbstractEntity, U extend
 		if (log.isDebugEnabled()) {
 			log.debug("Update dto:" + dto);
 		}
+		
+		checkAccessService.checkAccess(CanAccessDetails.builder()
+				.uid(request.getHeader("uid"))
+				.action("write")
+				.resource(this.getClass().getSimpleName())
+				.microserviceName(microserviceName)
+				.build());
 
 		U d = service.update(dto);
 		List<U> dtos = Arrays.asList(d);
@@ -114,6 +136,13 @@ public abstract class AbstractWriteController<T extends AbstractEntity, U extend
 			log.debug("Update dtos:" + dtos);
 		}
 
+		checkAccessService.checkAccess(CanAccessDetails.builder()
+				.uid(request.getHeader("uid"))
+				.action("write")
+				.resource(this.getClass().getSimpleName())
+				.microserviceName(microserviceName)
+				.build());
+		
 		List<U> savedDtos = service.update(dtos);
 
 		watch.stop();
