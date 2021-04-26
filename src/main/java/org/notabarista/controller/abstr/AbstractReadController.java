@@ -10,11 +10,14 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.lang3.time.StopWatch;
 import org.notabarista.dto.AbstractDTO;
 import org.notabarista.entity.AbstractEntity;
+import org.notabarista.entity.CanAccessDetails;
 import org.notabarista.entity.response.Response;
 import org.notabarista.entity.response.ResponseStatus;
 import org.notabarista.exception.AbstractNotabaristaException;
 import org.notabarista.service.abstr.IReadService;
+import org.notabarista.service.util.ICheckAccessService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
@@ -36,7 +39,13 @@ public abstract class AbstractReadController<T extends AbstractEntity, U extends
 
 	@Autowired
 	private IReadService<T, U> service;
+	
+	@Autowired
+	protected ICheckAccessService checkAccessService;
 
+	@Value("${spring.application.name}")
+	protected String microserviceName;
+	
 	@CrossOrigin
 	@GetMapping(value = "/findAll", produces = "application/json")
 	@ResponseBody
@@ -50,7 +59,14 @@ public abstract class AbstractReadController<T extends AbstractEntity, U extends
 		if (log.isDebugEnabled()) {
 			log.debug("Find all pageable: " + pageable);
 		}
-
+		
+		checkAccessService.checkAccess(CanAccessDetails.builder()
+				.uid(request.getHeader("uid"))
+				.action("read")
+				.resource(this.getClass().getSimpleName())
+				.microserviceName(microserviceName)
+				.build());
+		
 		if (pageable.isUnpaged() && pageable.getSort().isUnsorted()) {
 			if (log.isInfoEnabled()) {
 				log.info("Unsorted and unpaged");
@@ -84,6 +100,14 @@ public abstract class AbstractReadController<T extends AbstractEntity, U extends
 		if (log.isInfoEnabled()) {
 			log.info("Find by id: " + id);
 		}
+		
+		checkAccessService.checkAccess(CanAccessDetails.builder()
+				.uid(request.getHeader("uid"))
+				.action("read-filtered")
+				.resource(this.getClass().getSimpleName())
+				.microserviceName(microserviceName)
+				.build());
+		
 		List<U> dtos = new ArrayList<>();
 
 		U dto = service.findById(id);
@@ -109,6 +133,13 @@ public abstract class AbstractReadController<T extends AbstractEntity, U extends
 			log.debug("Find by entity:" + entity);
 			log.debug(pageable);
 		}
+		
+		checkAccessService.checkAccess(CanAccessDetails.builder()
+				.uid(request.getHeader("uid"))
+				.action("read-filtered")
+				.resource(this.getClass().getSimpleName())
+				.microserviceName(microserviceName)
+				.build());
 
 		Page<U> allDtos = service.findByDTO(entity, pageable);
 		
