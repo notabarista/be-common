@@ -1,11 +1,7 @@
 package org.notabarista.controller.abstr;
 
-import java.util.List;
-import java.util.UUID;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
+import lombok.NonNull;
+import lombok.extern.log4j.Log4j2;
 import org.apache.commons.lang3.time.StopWatch;
 import org.notabarista.dto.AbstractDTO;
 import org.notabarista.entity.AbstractEntity;
@@ -14,6 +10,7 @@ import org.notabarista.entity.response.Response;
 import org.notabarista.entity.response.ResponseStatus;
 import org.notabarista.exception.AbstractNotabaristaException;
 import org.notabarista.service.abstr.IDeleteService;
+import org.notabarista.util.NABConstants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,8 +21,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import lombok.NonNull;
-import lombok.extern.log4j.Log4j2;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.util.List;
+import java.util.UUID;
 
 @RestController
 @Log4j2
@@ -46,7 +45,7 @@ public abstract class AbstractDeleteController<T extends AbstractEntity, U exten
 		}
 		
 		checkAccessService.checkAccess(CanAccessDetails.builder()
-				.uid(request.getHeader("uid"))
+				.uid(request.getHeader(NABConstants.UID_HEADER_NAME))
 				.action("delete")
 				.resource(this.getClass().getSimpleName())
 				.microserviceName(microserviceName)
@@ -74,7 +73,7 @@ public abstract class AbstractDeleteController<T extends AbstractEntity, U exten
 		}
 
 		checkAccessService.checkAccess(CanAccessDetails.builder()
-				.uid(request.getHeader("uid"))
+				.uid(request.getHeader(NABConstants.UID_HEADER_NAME))
 				.action("delete")
 				.resource(this.getClass().getSimpleName())
 				.microserviceName(microserviceName)
@@ -102,7 +101,7 @@ public abstract class AbstractDeleteController<T extends AbstractEntity, U exten
 		}
 
 		checkAccessService.checkAccess(CanAccessDetails.builder()
-				.uid(request.getHeader("uid"))
+				.uid(request.getHeader(NABConstants.UID_HEADER_NAME))
 				.action("delete")
 				.resource(this.getClass().getSimpleName())
 				.microserviceName(microserviceName)
